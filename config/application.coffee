@@ -17,6 +17,18 @@ module.exports = lineman.config.extend "application",
       paths:
         archive: null
         rss: null
+        pages:
+          cwd: "app/pages"
+          src: "**/*.md"
+          ext: ".html"
+          flatten: true
+          expand: true
+        posts:
+          cwd: "app/posts"
+          src: "**/*.md"
+          ext: ".html"
+          flatten: true
+          expand: true
       lib:
         Category: require('../lib/category')
 
@@ -27,6 +39,23 @@ module.exports = lineman.config.extend "application",
     dist:
       context:
         cdn: cdn
+
+  copy:
+    dev:
+      expand: true
+      cwd: "app/pages"
+      src: ["**", "!**/*.{md,us}"]
+      dest: "generated"
+      filter: "isFile"
+      flatten: false
+
+    dist:
+      expand: true
+      cwd: "app/pages"
+      src: ["**", "!**/*.{md,us}"]
+      dest: "dist"
+      filter: "isFile"
+      flatten: false
 
   pages:
     dist:
